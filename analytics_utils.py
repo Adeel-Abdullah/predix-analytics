@@ -19,21 +19,13 @@ def client_login(uaaUrl, client_id_secret):
     print(json.loads(response.text))
     return json.loads(response.text)['access_token']
 
-def create_catalog_entry(analytics_catalogUrl, analytics_zone_id, token):
+def create_catalog_entry(analytics_catalogUrl, analytics_zone_id, token, body):
     headers = {
             'predix-zone-id': analytics_zone_id,
             'authorization': "Bearer " + token,
             'content-type': "application/json"
         }
-    body={
-      "name": "demo-adder-py",
-      "version": "v1",
-      "supportedLanguage": "Python",
-      "taxonomyLocation": "",
-      "author": "Adeel",
-      "description": "This analytic does simple math",
-      "customMetadata": "{\"assetid\":\"abc\"}"
-    }
+    
     response = requests.request('POST', analytics_catalogUrl, data=json.dumps(body), headers=headers)
     print(json.loads(response.text))
     return json.loads(response.text)['id']
@@ -63,7 +55,7 @@ def validate_analytic(token, analytic_id, analytics_zone_id, body):
             'predix-zone-id': analytics_zone_id,
             'authorization': "Bearer " + token
         }
-    response = requests.request('POST', analytics_validate, data=body, headers=headers)
+    response = requests.request('POST', analytics_validate, data=json.dumps(body), headers=headers)
     validationRequestId=json.loads(response.text)['validationRequestId']
     return validationRequestId
 
