@@ -27,7 +27,7 @@ body = {
 analytic_id = au.create_catalog_entry(analytics_catalogUrl,analytics_zone_id,token, body)
 
 #upload analytic
-path = "D:\predix\predix-analytics-sample\\analytics\demo-adder"
+path = "D:\\predix\\predix-analytics-sample\\analytics\\demo-adder"
 dir_name = "demo-adder-py"
 output_filename = "demo-adder-py"
 
