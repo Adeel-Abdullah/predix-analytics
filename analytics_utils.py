@@ -4,16 +4,18 @@ Created on Fri Dec 08 16:25:15 2017
 
 @author: Adeel Abdullah
 """
-import requests
 import json
-import shutil
 import os
+import shutil
+
+import requests
+
 
 def client_login(uaaUrl, client_id_secret):
     headers = {
-            'authorization': "Basic " + client_id_secret,
-            'cache-control': "no-cache",
-            'content-type': "application/x-www-form-urlencoded"
+        'authorization': "Basic " + client_id_secret,
+        'cache-control': "no-cache",
+        'content-type': "application/x-www-form-urlencoded"
         }
     response = requests.request('POST', uaaUrl, data="grant_type=client_credentials", headers=headers)
     print(json.loads(response.text))
